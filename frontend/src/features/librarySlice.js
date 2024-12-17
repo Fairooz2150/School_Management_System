@@ -9,15 +9,13 @@ export const fetchLibraryHistory = createAsyncThunk(
   }
 );
 
-// Add a new library record
-
 
 export const addRecord = createAsyncThunk(
   "library/addRecord",
   async (newRecord, thunkAPI) => {
     try {
       const response = await libraryAPI.addLibraryRecord(newRecord);
-      return response.data; // Returns the added record
+      return response.data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }

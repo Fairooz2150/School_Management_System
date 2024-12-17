@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as userAPI from "../api/userAPI"; // Assuming an API service to interact with backend
+import * as userAPI from "../api/userAPI"; 
 
-// Async Thunk to fetch all users
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async () => {
-    return await userAPI.fetchUsers(); // Replace with actual API call to fetch users
+    return await userAPI.fetchUsers(); 
   }
 );
 
@@ -13,23 +12,23 @@ export const fetchUsers = createAsyncThunk(
 export const addUser = createAsyncThunk(
   "users/addUser",
   async (user) => {
-    return await userAPI.addUser(user); // Replace with actual API call to add a new user
+    return await userAPI.addUser(user); 
   }
 );
 
-// Async Thunk to delete a user
+//  Delete a user
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
   async (userId) => {
-    return await userAPI.deleteUser(userId); // Replace with actual API call to delete user
+    return await userAPI.deleteUser(userId); 
   }
 );
 
-// Async Thunk to update a user's details (for editing)
+// Update a user's details (for editing)
 export const editUser = createAsyncThunk(
   "users/editUser",
   async (user) => {
-    return await userAPI.editUser(user); // Replace with actual API call to edit user
+    return await userAPI.editUser(user); 
   }
 );
 

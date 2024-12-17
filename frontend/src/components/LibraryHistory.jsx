@@ -6,12 +6,12 @@ import Modal from "./Modal";
 import { FaPlus } from "react-icons/fa";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
-import { fetchStudents } from "../features/studentSlice";  // Action to fetch students
+import { fetchStudents } from "../features/studentSlice"; 
 
 const LibraryHistory = () => {
   const dispatch = useDispatch();
   const { libraryHistory, loading } = useSelector((state) => state.library);
-  const { students } = useSelector((state) => state.students);  // Get students from store
+  const { students } = useSelector((state) => state.students);  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
@@ -19,7 +19,7 @@ const LibraryHistory = () => {
 
   useEffect(() => {
     dispatch(fetchLibraryHistory());
-    dispatch(fetchStudents());  // Fetch students
+    dispatch(fetchStudents());  
   }, [dispatch]);
 
   const handleAddRecord = (newRecord) => {
@@ -30,16 +30,16 @@ const LibraryHistory = () => {
 
   const handleDeleteRecord = (id) => {
     setSelectedRecord(id);
-    setIsConfirmationModalOpen(true); // Open the confirmation modal when delete is clicked
+    setIsConfirmationModalOpen(true);
   };
 
   const confirmDelete = () => {
     dispatch(deleteRecord(selectedRecord));
-    setIsConfirmationModalOpen(false); // Close the confirmation modal after deletion
+    setIsConfirmationModalOpen(false); 
   };
 
   const cancelDelete = () => {
-    setIsConfirmationModalOpen(false); // Close the modal if cancel is clicked
+    setIsConfirmationModalOpen(false);
   };
 
   return (
@@ -55,12 +55,10 @@ const LibraryHistory = () => {
         </button>
       </div>
 
-      {/* Loading Indicator */}
       {loading && (
         <div className="text-center text-lg text-blue-500">Loading...</div>
       )}
 
-      {/* Library Records Table */}
       {!loading && libraryHistory.length > 0 && (
         <table className="w-full mt-6 bg-white border-collapse border">
           <thead>
@@ -103,14 +101,12 @@ const LibraryHistory = () => {
         </table>
       )}
 
-      {/* No Records Message */}
       {!loading && libraryHistory.length === 0 && (
         <div className="text-center text-lg text-gray-600">
           No records available.
         </div>
       )}
 
-      {/* Library Form to Add New Record */}
       <LibraryForm
         isOpen={isModalOpen}
         onSubmit={handleAddRecord}

@@ -3,9 +3,9 @@ import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import LibrarianDashboard from "./pages/LibrarianDashboard";
 import OfficeStaffDashboard from "./pages/OfficeStaffDashboard";
-import StudentList from "./components/StudentList"; // Create this page for students
-import LibraryHistory from "./components/LibraryHistory"; // Create this page for library history
-import FeesHistory from "./components/FeesHistory"; // Create this page for fees history
+import StudentList from "./components/StudentList"; 
+import LibraryHistory from "./components/LibraryHistory";
+import FeesHistory from "./components/FeesHistory"; 
 import UserList from "./components/UserList";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Layout/Navbar";

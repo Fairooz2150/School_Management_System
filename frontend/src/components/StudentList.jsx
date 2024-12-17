@@ -11,7 +11,7 @@ import StudentForm from "./StudentForm";
 import { FaRegEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { RiDeleteBin2Line } from "react-icons/ri";
-import Modal from "./Modal"; 
+import Modal from "./Modal";
 const StudentList = () => {
   const dispatch = useDispatch();
   const { students, loading } = useSelector((state) => state.students);
@@ -41,12 +41,12 @@ const StudentList = () => {
   };
 
   const handleAddStudent = () => {
-    setCurrentStudent(null); // Clear current student for new record
+    setCurrentStudent(null); 
     setIsFormOpen(true);
   };
 
   const handleEditStudent = (student) => {
-    setCurrentStudent(student); // Set current student for editing
+    setCurrentStudent(student); 
     setIsFormOpen(true);
   };
 
@@ -145,7 +145,6 @@ const StudentList = () => {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && (
         <Modal
           message="Are you sure you want to delete this student?"

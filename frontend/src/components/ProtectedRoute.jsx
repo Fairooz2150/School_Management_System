@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ role, children }) => {
   const { user } = useSelector((state) => state.auth);
-  console.log("ProtectedRoute User Data:", user); // Debug user data
+  console.log("ProtectedRoute User Data:", user); 
 
   if (!user || user.role.toLowerCase() !== role.toLowerCase()) {
     return <Navigate to="/" />;

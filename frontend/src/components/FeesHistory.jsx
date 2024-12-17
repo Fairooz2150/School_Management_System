@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFeesHistory, addFeesRecord, deleteFeeRecord } from "../features/feesSlice";
-import { fetchStudents } from "../features/studentSlice"; // Assuming you have this for fetching students
+import {
+  fetchFeesHistory,
+  addFeesRecord,
+  deleteFeeRecord,
+} from "../features/feesSlice";
+import { fetchStudents } from "../features/studentSlice";
 import AddNewFeeForm from "./AddNewFeeForm";
 
 const FeesHistory = () => {
   const dispatch = useDispatch();
   const { feesHistory, loading } = useSelector((state) => state.fees);
-  const { students } = useSelector((state) => state.students); // Assuming you store students
+  const { students } = useSelector((state) => state.students);
   const [showModal, setShowModal] = useState(false);
   const [newFee, setNewFee] = useState({
     amount: "",
@@ -19,8 +23,6 @@ const FeesHistory = () => {
     remarks: "",
   });
 
-  
-
   useEffect(() => {
     dispatch(fetchFeesHistory());
     dispatch(fetchStudents());
@@ -28,11 +30,11 @@ const FeesHistory = () => {
 
   // Handle Add Record
   const handleAddRecord = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     // Dispatch the action to add the new fee record
     dispatch(addFeesRecord(newFee));
 
-    // After dispatching, reset the form and close the modal
+    // reset the form and close the modal
     setShowModal(false);
     setNewFee({
       amount: "",
@@ -131,7 +133,6 @@ const FeesHistory = () => {
         </div>
       )}
 
-      {/* Add New Fee Form Modal */}
       <AddNewFeeForm
         showModal={showModal}
         setShowModal={setShowModal}

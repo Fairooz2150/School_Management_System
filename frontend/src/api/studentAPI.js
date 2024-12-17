@@ -21,7 +21,7 @@ export const addStudent = async (studentData) => {
   const response = await axios.post(API_URL, studentData, {
     headers: {
       "Content-Type": "application/json",
-      ...getAuthHeader(), // Attach token to headers
+      ...getAuthHeader(), 
     },
   });
   return response.data;
@@ -30,7 +30,7 @@ export const addStudent = async (studentData) => {
 // Update a student
 export const updateStudent = async (id, studentData) => {
   const response = await axios.put(`${API_URL}/${id}`, studentData, {
-    headers: getAuthHeader(), // Attach token to headers
+    headers: getAuthHeader(),
   });
   return response.data;
 };
@@ -38,7 +38,7 @@ export const updateStudent = async (id, studentData) => {
 // Delete a student
 export const deleteStudent = async (studentId) => {
   const response = await axios.delete(`${API_URL}/${studentId}`, {
-    headers: getAuthHeader(), // Attach token to headers
+    headers: getAuthHeader(), 
   });
   return response.data;
 };

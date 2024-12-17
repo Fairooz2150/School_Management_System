@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, addUser, deleteUser, editUser } from "../features/userSlice"; // Assuming actions for fetching, adding, and deleting users
+import { fetchUsers, addUser, deleteUser, editUser } from "../features/userSlice";
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const UserList = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
-    role: "admin", // Default role
+    role: "admin", 
   });
 
   useEffect(() => {
@@ -17,17 +17,17 @@ const UserList = () => {
   }, [dispatch]);
 
   const handleAddUser = () => {
-    dispatch(addUser(newUser)); // Assuming addUser action
-    setShowModal(false); // Close modal after adding
+    dispatch(addUser(newUser));
+    setShowModal(false); 
     setNewUser({
       name: "",
       email: "",
       role: "admin",
-    }); // Reset form
+    });
   };
 
   const handleDeleteUser = (userId) => {
-    dispatch(deleteUser(userId)); // Assuming deleteUser action
+    dispatch(deleteUser(userId)); 
   };
 
   const handleChange = (e) => {
@@ -39,7 +39,6 @@ const UserList = () => {
   };
 
   const handleEditUser = (userId) => {
-    // Handle user edit functionality here (open a modal or another form)
     console.log("Edit user:", userId);
   };
 
@@ -47,7 +46,6 @@ const UserList = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold text-gray-700 mb-6">User List</h1>
 
-      {/* Add New User Button */}
       <button
         className="mb-6 p-2 bg-green-500 text-white rounded-lg"
         onClick={() => setShowModal(true)}
@@ -55,12 +53,10 @@ const UserList = () => {
         Add New User
       </button>
 
-      {/* Loading Indicator */}
       {loading && (
         <div className="text-center text-lg text-blue-500">Loading...</div>
       )}
 
-      {/* Users Table */}
       {!loading && users.length > 0 && (
         <div className="overflow-x-auto bg-white rounded-lg shadow-md">
           <table className="w-full table-auto">
@@ -101,14 +97,12 @@ const UserList = () => {
         </div>
       )}
 
-      {/* No Users Message */}
       {!loading && users.length === 0 && (
         <div className="text-center text-lg text-gray-600">
           No users available.
         </div>
       )}
 
-      {/* Modal for Add New User */}
       {showModal && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
           <div className="bg-white p-8 rounded-lg shadow-lg w-96">

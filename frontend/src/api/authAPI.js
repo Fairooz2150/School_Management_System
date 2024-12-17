@@ -9,7 +9,7 @@ export const login = async (credentials) => {
   const { token } = response.data;
 
   if (token) {
-    localStorage.setItem("token", token); // Save token to localStorage
+    localStorage.setItem("token", token);
   }
 
   return response.data;

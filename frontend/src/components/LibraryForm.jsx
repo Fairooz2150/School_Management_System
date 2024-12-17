@@ -13,15 +13,11 @@ const LibraryForm = ({ onSubmit, onCancel, students, isOpen }) => {
       bookName,
       borrowStudent,
       issueDate,
-      returnDate,  
+      returnDate,
       isReturned,
     };
     onSubmit(newRecord);
-    
-    
   };
-
-  
 
   if (!isOpen) return null;
 
