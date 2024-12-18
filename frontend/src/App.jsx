@@ -9,6 +9,7 @@ import FeesHistory from "./components/FeesHistory";
 import UserList from "./components/UserList";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
 
 const App = () => {
   return (
@@ -74,6 +75,7 @@ const App = () => {
           }
         />
       </Routes>
+      <Footer/>
     </Router>
   );
 };
