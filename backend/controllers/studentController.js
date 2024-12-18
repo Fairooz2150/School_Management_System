@@ -11,14 +11,14 @@ const getStudents = async (req, res) => {
 };
 
 const createStudent = async (req, res) => {
-  const { name, age, class: studentClass } = req.body; 
+  const { name, class: studentClass, dob, place, fatherName } = req.body; 
 
   if (!name || !studentClass) {
     return res.status(400).json({ message: "Name and Class are required" });
   }
 
   try {
-    const student = await Student.create({ name, age, class: studentClass });
+    const student = await Student.create({ name, dob, place, fatherName, class: studentClass});
     res.status(201).json(student);
   } catch (error) {
     res.status(400).json({ message: "Error creating student", error: error.message });

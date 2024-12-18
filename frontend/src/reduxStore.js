@@ -5,6 +5,7 @@ import authReducer from "./features/authSlice";
 import studentReducer from "./features/studentSlice";
 import libraryReducer from "./features/librarySlice";
 import feesReducer from "./features/feesSlice";
+import  userReducer  from "./features/userSlice";
 
 // Persist configuration
 const persistConfig = {
@@ -22,6 +23,7 @@ export const store = configureStore({
     students: studentReducer,
     library: libraryReducer,
     fees: feesReducer,
+    users:userReducer,
   },
 });
 
