@@ -5,43 +5,6 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
-// Controller function to register an admin
-const registerAdmin = async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
-
-    // Validate input
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new admin user
-    const newUser = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role: role || "Admin", // Default to 'Admin' if no role is provided
-    });
-
-    // Save to the database
-    await newUser.save();
-
-    res
-      .status(201)
-      .json({ message: "Admin registered successfully", user: newUser });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -68,34 +31,42 @@ const loginUser = async (req, res) => {
 };
 
 
+
+// Register User
 const registerUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
-
   try {
-    const userExists = await User.findOne({ email });
+    const { name, email, password, role } = req.body;
 
-    if (userExists) {
-      res.status(400).json({ message: "User already exists" });
-    } else {
-      const user = await User.create({ name, email, password, role });
-
-      if (user) {
-        res.status(201).json({
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          token: generateToken(user.id),
-        });
-      } else {
-        res.status(400).json({ message: "Invalid user data" });
-      }
+    // Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
     }
-  } catch (error) {
+
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      role: role || "Office Staff", 
+    });
+
+    // Save to the database
+    await newUser.save();
+
     res
-      .status(500)
-      .json({ message: "Registration failed", error: error.message });
+      .status(201)
+      .json({ message: "User registered successfully", user: newUser });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-module.exports = { registerAdmin, loginUser, registerUser };
+
+module.exports = { loginUser, registerUser };
