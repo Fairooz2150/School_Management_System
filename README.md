@@ -2,7 +2,6 @@
 
 This is a School Management System application that allows administrators to manage student fees, records, and more. This system implements role-based access control (RBAC) to effectively manage student information, library records, and fee histories, with distinct access levels for user roles like Admin, Office Staff, and Librarian.
 
-
 ### Roles:
 - **Admin**: Full access to the system. Can create, edit, and delete users (Office Staff, Librarians), manage students, library records, and fees history.
 - **Office Staff**: Can view and manage student details, manage fees history, and review library records.
@@ -17,7 +16,6 @@ This is a School Management System application that allows administrators to man
 - **Confirmation Dialogs**: Confirmation prompts for critical actions like deleting records to prevent accidental changes.
 - **State Management**: Redux is used for managing global state (students, library records, fees, and authentication).
 
-
 ## Technologies Used
 - **Frontend**: React.js (with Redux for state management)
 - **Backend**: Node.js with Express.js
@@ -30,8 +28,8 @@ This is a School Management System application that allows administrators to man
 ### Prerequisites
 
 - Node.js (v14)
-- npm 
-- MongoDB 
+- npm
+- MongoDB
 
 ### Backend Setup
 
@@ -80,6 +78,20 @@ This is a School Management System application that allows administrators to man
 
    This will start the frontend on `http://localhost:5173`.
 
+## Adding an Admin User Manually
+If you want to run the project locally, please add an admin user manually to the `users` collection in your MongoDB:
+
+```json
+{
+  "_id": { "$oid": "676085dbcb9cba16b7fcd2d7" },
+  "name": "Admin",
+  "email": "admin@email.com",
+  "password": "adminpassword",
+  "role": "admin",
+}
+```
+
+This will give you an admin user to log in to the application.
 
 ## Libraries Used
 
@@ -93,11 +105,10 @@ This is a School Management System application that allows administrators to man
 - **Node.js**: JavaScript runtime for building the server.
 - **Express.js**: Web framework for building the API.
 - **MongoDB**: Database for storing school records.
-- **Mongoose**: MongoDB object modeling tool .
+- **Mongoose**: MongoDB object modeling tool.
 - **jsonwebtoken (JWT)**: For handling authentication and creating JWT tokens.
 - **dotenv**: For loading environment variables from `.env` file.
 - **cors**: Middleware to enable Cross-Origin Resource Sharing (CORS) between frontend and backend.
-
 
 ### Features Available:
 - **View Fees History**: View all the fee records of students.
@@ -106,8 +117,6 @@ This is a School Management System application that allows administrators to man
 - **Delete Record**: Delete an existing fee record.
 - **Manage Students**: Add, view, and manage student records.
 - **Manage Staff accounts**: Add, view, and manage staff accounts by Admin.
-
-
 
 ## Troubleshooting
 
