@@ -8,17 +8,18 @@ const getStudents = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error fetching students", error: error.message });
   }
-};const createStudent = async (req, res) => {
-  const { name, age } = req.body;
-  const studentClass = req.body.class; // Directly access class
+};
+
+const createStudent = async (req, res) => {
+  const { name, age, class: studentClass } = req.body; 
+
+  if (!name || !studentClass) {
+    return res.status(400).json({ message: "Name and Class are required" });
+  }
 
   try {
-    const student = await Student.create({
-      name,
-      age,
-      class: studentClass, // Use 'class' here
-    });
-    res.status(201).json(student); // Send the newly created student as a response
+    const student = await Student.create({ name, age, class: studentClass });
+    res.status(201).json(student);
   } catch (error) {
     res.status(400).json({ message: "Error creating student", error: error.message });
   }

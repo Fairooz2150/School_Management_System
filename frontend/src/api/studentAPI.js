@@ -18,10 +18,11 @@ export const fetchStudents = async () => {
 
 // Add a new student
 export const addStudent = async (studentData) => {
+  console.log("Sending Student Data:", studentData); 
   const response = await axios.post(API_URL, studentData, {
     headers: {
       "Content-Type": "application/json",
-      ...getAuthHeader(), 
+      ...getAuthHeader(),
     },
   });
   return response.data;

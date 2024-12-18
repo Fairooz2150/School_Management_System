@@ -35,11 +35,12 @@ const StudentForm = ({ student, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form Data Submitted:", formData); 
     onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit}>
       <div>
         <label className="block text-sm font-medium">Name</label>
         <input
