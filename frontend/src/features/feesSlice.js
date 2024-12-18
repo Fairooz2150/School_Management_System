@@ -13,7 +13,7 @@ export const fetchFeesHistory = createAsyncThunk(
 export const addFeesRecord = createAsyncThunk(
   "fees/addFeeRecord",
   async (feeData) => {
-    return await feesAPI.addFeeRecord(feeData);
+    return await feesAPI.addFeesRecord(feeData);
   }
 );
 
@@ -21,7 +21,7 @@ export const addFeesRecord = createAsyncThunk(
 export const deleteFeeRecord = createAsyncThunk(
   "fees/deleteFeeRecord",
   async (id) => {
-    return await feesAPI.deleteFeeRecord(id);
+    return await feesAPI.deleteFeesRecord(id);
   }
 );
 
@@ -29,7 +29,7 @@ export const deleteFeeRecord = createAsyncThunk(
 export const updateFeeRecord = createAsyncThunk(
   "fees/updateFeeRecord",
   async (feeData) => {
-    return await feesAPI.updateFeeRecord(feeData);
+    return await feesAPI.updateFeesRecord(feeData);
   }
 );
 
