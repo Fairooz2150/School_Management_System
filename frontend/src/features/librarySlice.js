@@ -1,66 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as libraryAPI from "../api/libraryAPI";
 
-// Fetch library history
-export const fetchLibraryHistory = createAsyncThunk(
-  "library/fetchLibraryHistory",
-  async () => {
-    return await libraryAPI.fetchLibraryHistory();
-  }
-);
+export const fetchLibraryHistory = createAsyncThunk("library/fetchLibraryHistory", async () => {
+  return await libraryAPI.fetchLibraryHistory();
+});
 
+export const addRecord = createAsyncThunk("library/addRecord", async (newRecord) => {
+  return await libraryAPI.addLibraryRecord(newRecord);
+});
 
-export const addRecord = createAsyncThunk(
-  "library/addRecord",
-  async (newRecord, thunkAPI) => {
-    try {
-      const response = await libraryAPI.addLibraryRecord(newRecord);
-      return response.data; 
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
+export const updateRecord = createAsyncThunk("library/updateRecord", async ({ id, data }) => {
+  return await libraryAPI.updateLibraryRecord(id, data);
+});
 
-
-
-// Delete a library record
-export const deleteRecord = createAsyncThunk(
-  "library/deleteRecord",
-  async (id) => {
-    return await libraryAPI.deleteLibraryRecord(id);
-  }
-);
+export const deleteRecord = createAsyncThunk("library/deleteRecord", async (id) => {
+  return await libraryAPI.deleteLibraryRecord(id);
+});
 
 const librarySlice = createSlice({
   name: "library",
-  initialState: {
-    libraryHistory: [],
-    loading: false,
-  },
-  reducers: {},
+  initialState: { libraryHistory: [], loading: false },
   extraReducers: (builder) => {
     builder
-      // Fetch library history
-      .addCase(fetchLibraryHistory.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(fetchLibraryHistory.fulfilled, (state, action) => {
         state.libraryHistory = action.payload;
-        state.loading = false;
       })
-      .addCase(fetchLibraryHistory.rejected, (state) => {
-        state.loading = false;
-      })
-      // Add a new record
       .addCase(addRecord.fulfilled, (state, action) => {
-        state.libraryHistory.push(action.payload); // Add the new record to state
+        state.libraryHistory.push(action.payload);
       })
-      // Delete a record
       .addCase(deleteRecord.fulfilled, (state, action) => {
-        state.libraryHistory = state.libraryHistory.filter(
-          (record) => record.id !== action.payload.id // Remove the deleted record from state
-        );
+        state.libraryHistory = state.libraryHistory.filter((r) => r._id !== action.payload.id);
       });
   },
 });
