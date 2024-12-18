@@ -5,6 +5,7 @@ const UserForm = ({ user, onSubmit, onClose }) => {
     name: "",
     email: "",
     role: "admin",
+    password: ""
   });
 
   useEffect(() => {
@@ -68,6 +69,17 @@ const UserForm = ({ user, onSubmit, onClose }) => {
               <option value="librarian">Librarian</option>
               <option value="officeStaff">Office Staff</option>
             </select>
+          </div>
+          <div className="mt-4">
+            <label className="block">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+              required
+            />
           </div>
           <div className="flex justify-between">
             <button

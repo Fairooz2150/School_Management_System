@@ -1,36 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as userAPI from "../api/userAPI"; 
+import * as userAPI from "../api/userAPI";
+import * as registerUserAPI from "../api/authAPI";
 
-export const fetchUsers = createAsyncThunk(
-  "users/fetchUsers",
-  async () => {
-    return await userAPI.fetchUsers(); 
-  }
-);
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+  return await userAPI.fetchUsers();
+});
 
 // Async Thunk to add a new user
-export const addUser = createAsyncThunk(
-  "users/addUser",
-  async (user) => {
-    return await userAPI.addUser(user); 
-  }
-);
+export const addUser = createAsyncThunk("users/addUser", async (user) => {
+  return await registerUserAPI.registerUser(user);
+});
 
 //  Delete a user
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
   async (userId) => {
-    return await userAPI.deleteUser(userId); 
+    return await userAPI.deleteUser(userId);
   }
 );
 
 // Update a user's details (for editing)
-export const editUser = createAsyncThunk(
-  "users/editUser",
-  async (user) => {
-    return await userAPI.editUser(user); 
-  }
-);
+export const editUser = createAsyncThunk("users/editUser", async (user) => {
+  return await userAPI.editUser(user);
+});
 
 const userSlice = createSlice({
   name: "users",
@@ -74,7 +66,9 @@ const userSlice = createSlice({
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = state.users.filter(user => user.id !== action.payload.id); // Remove the deleted user
+        state.users = state.users.filter(
+          (user) => user.id !== action.payload.id
+        ); // Remove the deleted user
       })
       .addCase(deleteUser.rejected, (state, action) => {
         state.loading = false;
@@ -87,7 +81,9 @@ const userSlice = createSlice({
       })
       .addCase(editUser.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.users.findIndex(user => user.id === action.payload.id);
+        const index = state.users.findIndex(
+          (user) => user.id === action.payload.id
+        );
         if (index !== -1) {
           state.users[index] = action.payload; // Update the user data
         }
