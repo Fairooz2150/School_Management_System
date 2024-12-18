@@ -62,13 +62,13 @@ const studentSlice = createSlice({
       .addCase(updateStudent.fulfilled, (state, action) => {
         const updatedStudent = action.payload;
         state.students = state.students.map((student) =>
-          student.id === updatedStudent.id ? updatedStudent : student
+          student._id === updatedStudent._id ? updatedStudent : student
         );
       })
       // Delete student
       .addCase(deleteStudent.fulfilled, (state, action) => {
         state.students = state.students.filter(
-          (student) => student.id !== action.payload
+          (student) => student._id !== action.payload
         );
       });
   },

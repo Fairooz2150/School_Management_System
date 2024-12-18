@@ -1,5 +1,8 @@
 const Student = require("../models/Student");
 
+
+
+
 const getStudents = async (req, res) => {
   try {
     // Fetch all students from the database
@@ -9,21 +12,31 @@ const getStudents = async (req, res) => {
     res.status(500).json({ message: "Error fetching students", error: error.message });
   }
 };
-
 const createStudent = async (req, res) => {
-  const { name, class: studentClass, dob, place, fatherName } = req.body; 
+  const { name, class: studentClass, dob, place, fatherName, rollNo } = req.body;
 
   if (!name || !studentClass) {
     return res.status(400).json({ message: "Name and Class are required" });
   }
 
+  const validDob = dob ? new Date(dob) : null;
+  if (dob && isNaN(validDob)) {
+    return res.status(400).json({ message: "Invalid Date of Birth format" });
+  }
+
   try {
-    const student = await Student.create({ name, dob, place, fatherName, class: studentClass});
+    // Attempt to "upsert" the student (insert if not exists, update if exists)
+    const student = await Student.findOneAndUpdate(
+      { name },  // Example condition (you may use other unique fields like `rollNo`)
+      { name, dob: validDob, place, fatherName, class: studentClass, rollNo },
+      { new: true, upsert: true }
+    );
     res.status(201).json(student);
   } catch (error) {
     res.status(400).json({ message: "Error creating student", error: error.message });
   }
 };
+
 
 
 const updateStudent = async (req, res) => {
